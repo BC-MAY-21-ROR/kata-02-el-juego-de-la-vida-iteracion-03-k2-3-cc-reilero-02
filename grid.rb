@@ -1,3 +1,5 @@
+require 'rspec/autorun'
+
 class Grid
     attr_accessor :width, :height, :gridTable
     def initialize(height, width)
@@ -6,13 +8,12 @@ class Grid
     end
 
     def create_table
-        @gridTable = Array.new(@height){ Array.new(@width) {'.'} }
+        @gridTable = Array.new(@height){ Array.new(@width) {Cells.new} }
     end
    
 end
 
 class View_grid
-
     def show_table(grid)
         for i in 0..grid.height-1 
             p grid.gridTable[i].join(' ')
@@ -30,7 +31,20 @@ describe Grid do
             expect(Grid.new(6, 2).create_table).to eq([[".","."], [".","."], [".","."], [".","."], [".","."], [".","."]])
       end
     end
-  end
+  end 
+
+class Cells
+    def initialize
+        @type_of_cell= ['.',"*"]
+        @status = @type_of_cell[rand(2)]
+    end
+end
+
+class Neighbors 
+    def run_matrix(grid)
+                
+    end
+end
 
 class Main
     def run
